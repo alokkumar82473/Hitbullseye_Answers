@@ -1,0 +1,687 @@
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        padding: 20px;
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: white; /* Light mode background */
+        color: black; /* Light mode text color */
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+        background-color: #121212; /* Dark mode background */
+        color: #e0e0e0; /* Dark mode text color */
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+        border-bottom: 2px solid #007BFF;
+        padding-bottom: 10px;
+    }
+
+    .question {
+        border-bottom: 3px solid #ddd;
+        padding: 20px;
+    }
+
+    body.dark-mode .question {
+        border-bottom: 3px solid #444;
+    }
+
+    h2 {
+        color: #007BFF;
+        margin-bottom: 10px;
+    }
+
+    strong {
+        color: #333;
+    }
+
+    body.dark-mode strong {
+        color: #ccc;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-wrap: wrap;
+        margin: 5px 0;
+        padding: 10px;
+        background-color: #f0f0f0; /* Light mode background for options */
+        color: black; /* Light mode text color */
+        border-radius: 10px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    li:hover {
+        background-color: #e0e0e0;
+    }
+
+    body.dark-mode li {
+        background-color: #2a2a2a; /* Dark mode background for options */
+        color: #e0e0e0;
+    }
+
+    body.dark-mode li:hover {
+        background-color: #3a3a3a;
+    }
+
+    /* Highlight correct answer */
+    .correct-answer {
+        background-color: #d4edda; /* Light green background for light mode */
+        color: #155724; /* Dark green text */
+        font-weight: bold;
+    }
+
+    body.dark-mode .correct-answer {
+        background-color: #2a4f2a; /* Dark green background for dark mode */
+        color: #a8d5a8; /* Light green text */
+    }
+
+    .explanation {
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        margin-top: 10px;
+        color: #555;
+    }
+
+    body.dark-mode .explanation {
+        border-top: 1px solid #444;
+        color: #bbb;
+    }
+
+    .search-bar {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .search-bar input {
+        padding: 10px;
+        width: 80%;
+        max-width: 600px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+
+    body.dark-mode .search-bar input {
+        background-color: #333;
+        color: #e0e0e0;
+        border: 1px solid #555;
+    }
+
+    .watermark {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(-45deg);
+        color: rgba(0, 0, 0, 0.1);
+        font-size: 50px;
+        font-weight: bold;
+        pointer-events: none;
+        user-select: none;
+        z-index: -1;
+    }
+
+    body.dark-mode .watermark {
+        color: rgba(255, 255, 255, 0.1);
+    }
+
+    .telegram-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 18px;
+    }
+
+    .telegram-link a {
+        color: #0088cc;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    body.dark-mode .telegram-link a {
+        color: #66d1ff;
+    }
+</style>
+
+
+
+
+
+    </style>
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search questions..." onkeyup="filterQuestions()">
+    </div>
+    <h1>AE Verbal Practice Test 5 (2026)</h1>
+    <h1>Hitbullseye LPU</h1>
+    <div class="watermark">LPU Study Support</div>
+    <div class="telegram-link">
+        Connect with us on <a href="https://www.youtube.com/@LPUStudySupport" target="_blank">Youtube</a>
+    </div>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Toggle Example</title>
+    <style>
+        /* Light Mode Styles (Default) */
+        body {
+            background-color: white;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            background-color: #121212; /* Darker background */
+            color: #e0e0e0; /* Light text for readability */
+        }
+
+        /* Option Styles */
+        .option {
+            background-color: #f9f9f9;
+            color: black;
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        /* Correct Option Styling */
+        .option.correct {
+            background-color: #d4edda; /* Light green for correct */
+            color: #155724; /* Dark green text */
+        }
+
+        /* Dark Mode for Options */
+        body.dark-mode .option {
+            background-color: #1e1e1e; /* Dark background for options */
+            color: #e0e0e0; /* Light text */
+            border: 1px solid #444; /* Slight border for contrast */
+        }
+
+        /* Dark Mode Correct Option */
+        body.dark-mode .option.correct {
+            background-color: #2a4f2a; /* Darker green for dark mode */
+            color: #a8d5a8; /* Light green text */
+        }
+    </style>
+</head>
+<body>
+    <div style="text-align: right; margin-bottom: 10px;">
+        <button id="themeToggle" style="padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            Enable Dark Mode
+        </button>
+    </div>
+    <script>
+        // Log to check if JS is running
+        console.log('JavaScript is working!');
+
+        const themeToggleButton = document.getElementById('themeToggle');
+
+        // Check if dark mode is already enabled (from localStorage)
+        const darkModeEnabled = localStorage.getItem('darkMode') === 'true';
+        if (darkModeEnabled) {
+            document.body.classList.add('dark-mode');
+            themeToggleButton.textContent = 'Enable Light Mode';
+        }
+
+        themeToggleButton.addEventListener('click', () => {
+            // Toggle the dark mode class on the body
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+
+            if (isDarkMode) {
+                themeToggleButton.textContent = 'Enable Light Mode';
+                localStorage.setItem('darkMode', 'true');
+            } else {
+                themeToggleButton.textContent = 'Enable Dark Mode';
+                localStorage.setItem('darkMode', 'false');
+            }
+
+            // Log to check the current mode
+            console.log(isDarkMode ? 'Dark Mode Enabled' : 'Light Mode Enabled');
+        });
+    </script>
+</body>
+</html>
+
+        </button>
+    </div>
+    
+<div class="question">
+            <h2>1. Antonyms</h2>
+            <div></div>
+            <div>MERCURIAL</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. level–headed</li><li>B. ephemeral</li><li>C. laconic</li><li>D. Skinflint</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Mercurial means unpredictable so antonym will be level-headed which means calm and sensible even in difficult situations.&nbsp;</div>
+        </div><div class="question">
+            <h2>2. Antonyms</h2>
+            <div></div>
+            <div><div>AUTHENTIC</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Genuine</li><li>B. Reliable</li><li>C. Valid</li><li class="correct-answer">D. Fictitious</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">D</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Authentic" means genuine or real, while "fictitious" means imaginary or not real.<br></div>
+        </div><div class="question">
+            <h2>3. Antonyms</h2>
+            <div></div>
+            <div><div>BRITTLE</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Strong</li><li>B. Frail</li><li>C. Fragile</li><li>D. Dismal</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Brittle" means fragile or easily broken, while "strong" indicates the opposite, meaning sturdy or durable.</div>
+        </div><div class="question">
+            <h2>4. Antonyms</h2>
+            <div></div>
+            <div><div>COMPASSION</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Kindness</li><li>B. Sympathy</li><li class="correct-answer">C. Cruelty</li><li>D. Empathy</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Compassion" refers to the feeling of sympathy and concern for the sufferings or misfortunes of others, while "cruelty" indicates a lack of compassion or kindness.<br></div>
+        </div><div class="question">
+            <h2>5. Antonyms</h2>
+            <div></div>
+            <div><div>DISASTER</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Calamity</li><li class="correct-answer">B. Prosperity</li><li>C. Misfortune</li><li>D. Mishap</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Disaster" refers to a sudden event causing great damage or suffering, while "prosperity" indicates a state of flourishing or successfulness.<br><br></div>
+        </div><div class="question">
+            <h2>6. Antonyms</h2>
+            <div></div>
+            <div><div>FATIGUE</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Vigour</li><li>B. Exhausted</li><li>C. Tiredness</li><li>D. Weakness</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Fatigue" refers to tiredness or exhaustion, while "vigour" indicates strength, energy, or vitality.</div>
+        </div><div class="question">
+            <h2>7. Antonyms</h2>
+            <div></div>
+            <div><div>MODERATE</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. limited</li><li>B. Reasonable</li><li>C. Lenient</li><li class="correct-answer">D. Excessive</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">D</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Moderate" means within reasonable limits or not excessive, while "excessive" means exceeding the bounds of moderation or reasonableness.<br><br></div>
+        </div><div class="question">
+            <h2>8. Antonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">At first the workers were agreeable to the proposals of their Manager, but later they were <strong><u>reconciled</u> </strong>to the new proposals.</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">resistant</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">estranged</span></li><li>C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">cooperate</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">agreed&nbsp;</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Reconciled" means accepting or coming to terms with something, while "resistant" means being opposed or unwilling to accept something. The other options do not convey the opposite meaning of "reconciled" as accurately.</div>
+        </div><div class="question">
+            <h2>9. Antonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">The thief <u>showed</u> his disbelief when informed that his partner had been arrested.</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">displayed</span></li><li class="correct-answer">B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">concealed</span></li><li>C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">battled</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">marked</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Concealed" is the direct antonym of "showed," meaning to hide or keep something hidden, which is the opposite of making something visible or displaying it. The other options do not provide a meaning that directly opposes "showed."</div>
+        </div><div class="question">
+            <h2>10. Antonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">The movie star's biography is a glossy, <u>sycophantic</u> portrayal.</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">cowardly</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">domineering</span></li><li class="correct-answer">C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">flattering</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">insolent</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Sycophantic" means excessively flattering, usually to gain favor, which matches the meaning of "flattering" closely. The other options do not convey the same sense of insincere praise.</div>
+        </div><div class="question">
+            <h2>11. Antonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">The Minister unleashed a <u>compliment</u> against the newspaper for its biased editorial on illiteracy among women in his constituency.</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">denunciation</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">endorsement</span></li><li>C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">regulation</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">speculation&nbsp;</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Compliment" means to praise, while "denunciation" means to publicly condemn or criticize, making it the correct antonym. The other options do not directly oppose the meaning of "compliment."</div>
+        </div><div class="question">
+            <h2>12. Antonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Choose the correct ANTONYM for <u>sullen</u> from the options given below.&nbsp;</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">morose</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">reticent</span></li><li>C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">timid</span></li><li class="correct-answer">D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">genial</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">D</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Genial" is the opposite of "sullen" because it means friendly and cheerful, whereas "sullen" means bad-tempered and gloomy. The other options are either similar in meaning to "sullen" or do not directly oppose its meaning.</div>
+        </div><div class="question">
+            <h2>13. Antonyms</h2>
+            <div></div>
+            <div>Choose the correct antonym of Insolent:</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Submissive</li><li>B. Arrogant</li><li>C. Overbearing</li><li>D. Disdainful</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Insolent means lacking respect or being rude, the antonym for this is submissive.</div>
+        </div><div class="question">
+            <h2>14. Antonyms</h2>
+            <div></div>
+            <div>Choose the correct antonym of Tardy:</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Gradual</li><li class="correct-answer">B. Prompt</li><li>C. Reluctant</li><li>D. Quick</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Tardy means slow to act, move or happen; happening or arriving after the planned, expected or usual time. Hence, the correct antonym of the word is prompt from the given options.</div>
+        </div><div class="question">
+            <h2>15. Antonyms</h2>
+            <div></div>
+            <div>Chaos</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Symmetric</li><li>B. Inexperienced</li><li>C. Disturbance</li><li>D. Topsy Turvy</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Chaos: a state of great disorder, confusion hence its antonym will be Symmetric.</div>
+        </div><div class="question">
+            <h2>16. Antonyms</h2>
+            <div></div>
+            <div>Audacious<br><br></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Cautious</li><li>B. Obvious</li><li>C. Doughty</li><li class="correct-answer">D. Cowardly</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">D</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Audacious: willing to take risks or do something shocking. Hence its antonym will be Cowardly: a person who lacks courage in facing danger, difficulty, opposition, pain, etc. a timid or easily intimidated person.</div>
+        </div><div class="question">
+            <h2>17. Antonyms</h2>
+            <div></div>
+            <div>Reluctant<br><br></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Agreeable</li><li class="correct-answer">B. Eager</li><li>C. Diffident</li><li>D. Unwilling</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Reluctant: not wanting to do something because you are not sure it is the right thing to do. Eager: strongly wanting to do or have something.</div>
+        </div><div class="question">
+            <h2>18. Antonyms</h2>
+            <div></div>
+            <div>Desecration<br></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Consecration<br></li><li>B. Discouragement</li><li>C. Despondency</li><li>D. Expectation</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Desecration means: to violate the sanctity of some pious thing.<br>Consecration: to make or declare sacred especially.&nbsp;</div>
+        </div><div class="question">
+            <h2>19. Antonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Pick the word opposite in meaning to the word “OBLIGATORY”.</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Compulsory</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Exclusionary</span></li><li class="correct-answer">C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Voluntary</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Exemplary</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Obligatory" means something that is required or mandatory. The opposite of obligatory is voluntary, which means something done by one's own free will without any obligation.</div>
+        </div><div class="question">
+            <h2>20. Antonyms</h2>
+            <div></div>
+            <div><strong>RETAIN</strong><br></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <div style="text-align:justify;">Impose</div></li><li class="correct-answer">B. <div style="text-align:justify;">Renounce</div></li><li>C. <div style="text-align:justify;">Conserve</div></li><li>D. <div style="text-align:justify;">Reserve</div></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> The word "<strong>RETAIN</strong>" means to keep or continue to have possession of something. The opposite in meaning to "<strong>retain</strong>" is<strong> (b)</strong>. <strong>Renounce</strong>, which means to give up or abandon.</div>
+        </div><div class="question">
+            <h2>21. Synonyms</h2>
+            <div></div>
+            <div>Obnoxious</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Depressing</li><li class="correct-answer">B. Disgusting</li><li>C. Arrogant</li><li>D. Filthy</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Obnoxious means disagreeable, nasty, unpleasant</div>
+        </div><div class="question">
+            <h2>22. Synonyms</h2>
+            <div></div>
+            <div>METICULOUS</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. FALSE</li><li class="correct-answer">B. CAREFUL</li><li>C. CASUAL</li><li>D. CAREFREE</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Meticulous" means showing great attention to detail; therefore, "careful" is the best synonym for it.<br></div>
+        </div><div class="question">
+            <h2>23. Synonyms</h2>
+            <div></div>
+            <div>BARTER</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Seize</li><li class="correct-answer">B. Remove</li><li>C. Steal</li><li>D. Exchange</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Barter" means to exchange goods or services for other goods or services without using money.<br></div>
+        </div><div class="question">
+            <h2>24. Synonyms</h2>
+            <div></div>
+            <div>ACCOLADE</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Clumsy</li><li class="correct-answer">B. Praise</li><li>C. Inactive</li><li>D. Orthodox</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Accolade" refers to an award or expression of praise or approval.<br></div>
+        </div><div class="question">
+            <h2>25. Synonyms</h2>
+            <div></div>
+            <div>YARD STICK</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Standard</li><li>B. Statistics</li><li>C. Mark</li><li>D. Size</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Yardstick" is used metaphorically to mean a standard or criterion for comparison.</div>
+        </div><div class="question">
+            <h2>26. Synonyms</h2>
+            <div></div>
+            <div>TEDIOUS</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Painful</li><li class="correct-answer">B. Tiresome</li><li>C. Troublesome&nbsp;</li><li>D. Lengthy</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Tedious" means something that is boring or tiresome due to being repetitive or monotonous.<br></div>
+        </div><div class="question">
+            <h2>27. Synonyms</h2>
+            <div></div>
+            <div>DEPLETE</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Destroy</li><li>B. Joy</li><li class="correct-answer">C. Exhaust</li><li>D. Finish</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Deplete" means to use up or reduce the quantity or strength of something, often referring to resources or energy.<br></div>
+        </div><div class="question">
+            <h2>28. Synonyms</h2>
+            <div></div>
+            <div>RECTIFY</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Correct</li><li>B. To Command</li><li>C. Destroy</li><li>D. To Build</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Rectify" means to put something right or to correct an error or mistake</div>
+        </div><div class="question">
+            <h2>29. Synonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">For sometime now, we've been <strong><u>toying</u> </strong>with the idea of transferring all our business from physical to online sales only</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">launch</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">showing</span></li><li class="correct-answer">C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">considering</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">careful</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> <div style="text-align:justify;">"Considering" accurately captures the meaning of "toying with the idea," which involves thinking about or contemplating the idea of transferring all business from physical to online sales. The other options do not convey this sense of preliminary contemplation.</div></div>
+        </div><div class="question">
+            <h2>30. Synonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Why did you make that <u>flippant</u> remark about her choice of clothes ?</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">sarcastic</span></li><li>B. <span style="font-size:14.6667px;">indifferent</span></li><li>C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">casual</span></li><li class="correct-answer">D. <span style="font-size:14.6667px;">disrespectful</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">D</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Disrespectful" accurately conveys the lack of respect implied by "flippant." While "sarcastic" and "casual" may seem similar, they do not directly convey the disrespectful attitude inherent in "flippant." "Indifferent" implies a lack of interest, which does not fit the context as closely.</div>
+        </div><div class="question">
+            <h2>31. Synonyms</h2>
+            <div></div>
+            <div><span lang="en-us" style="font-size:11pt;" xml:lang="en-us">Choose the correct SYNONYM for <u>redoubtable</u> from the options given below.&nbsp;</span></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">flimsy</span></li><li>B. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">perplexing</span></li><li class="correct-answer">C. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">formidable</span></li><li>D. <span lang="en-us" style="font-size:11pt;" xml:lang="en-us">voluble</span></li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> "Formidable" captures the essence of "redoubtable," which means inspiring fear or respect due to impressive qualities. The other options do not align with this meaning.</div>
+        </div><div class="question">
+            <h2>32. Synonyms</h2>
+            <div></div>
+            <div>Choose the synonym of “Ubiquitous”:</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Scarce</li><li>B. Rare</li><li class="correct-answer">C. Widespread</li><li>D. Hidden</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Ubiquitous means, seeming to be everywhere or in several places at the same time; very common. The synonyms are: omnipresent, universal, all over etc.</div>
+        </div><div class="question">
+            <h2>33. Synonyms</h2>
+            <div></div>
+            <div>Pick the synonym of “Pernicious”:</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Harmless</li><li>B. Beneficial</li><li class="correct-answer">C. Destructive</li><li>D. Kind</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Pernicious means having a very harmful or evil effect on somebody/something, in a way that is slow and not easily noticeable. Other synonyms of the word are damaging, dangerous or deadly.</div>
+        </div><div class="question">
+            <h2>34. Synonyms</h2>
+            <div></div>
+            <div><div style="text-align:justify;">Identify the synonym for “<strong>ephemeral</strong>”:</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Permanent</li><li>B. Lasting&nbsp;</li><li class="correct-answer">C. Transient</li><li>D. Eternal</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> It means ‘transient’.</div>
+        </div><div class="question">
+            <h2>35. Synonyms</h2>
+            <div></div>
+            <div><div style="text-align:justify;">What is the definition of "exacerbate"?</div></div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. To alleviate of lessen</li><li class="correct-answer">B. To aggravate or make worse<br></li><li>C. To understand or comprehend&nbsp;</li><li>D. To ignore or neglect</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> It means to worsen the situation.</div>
+        </div><div class="question">
+            <h2>36. Synonyms</h2>
+            <div></div>
+            <div>Solitude</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Multitude</li><li class="correct-answer">B. Aloneness</li><li>C. Lonely</li><li>D. Single minded</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">B</span></div>
+            <div class="explanation"><strong>Explanation:</strong> As solitude is a noun, its synonym will also be a noun i.e. Aloneness. Multitude: plenty and abundant. Aloneness (noun) and lonely (Adjective) are more or less same but as parts of speech these are different. Single Mindedness means: Focused</div>
+        </div><div class="question">
+            <h2>37. Synonyms</h2>
+            <div></div>
+            <div>Acumen</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. expert</li><li>B. convict</li><li>C. neophyte</li><li>D. tyro&nbsp;</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Acumen: expert and dexterous.</div>
+        </div><div class="question">
+            <h2>38. Synonyms</h2>
+            <div></div>
+            <div>Exodus</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. homecoming</li><li>B. influx</li><li class="correct-answer">C. mass departure</li><li>D. Accumulation</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Exodus means: mass departure</div>
+        </div><div class="question">
+            <h2>39. Synonyms</h2>
+            <div></div>
+            <div>Wrangle</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li>A. Prediction</li><li>B. Agreement</li><li class="correct-answer">C. Squabble</li><li>D. Invisibility&nbsp;</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">C</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Wrangle: to argue in a noisy way about something that is not very important.</div>
+        </div><div class="question">
+            <h2>40. Synonyms</h2>
+            <div></div>
+            <div>Pick the word <u>opposite</u> in meaning to the word "DOLEFUL".</div>
+            <div><strong>Options:</strong></div>
+            <ul>
+                <li class="correct-answer">A. Cheerful</li><li>B. Deceitful</li><li>C. Beautiful</li><li>D. Mournful</li>
+            </ul>
+            <div><strong>Correct Answer:</strong> <span class="correct-answer">A</span></div>
+            <div class="explanation"><strong>Explanation:</strong> Doleful means to mourn or express sadness<br>Cheerful is to be happy<br>Deceitful is to be dishonest<br>Beautiful is to be aesthetically pleasing<br>Mournful is to be sad<br><strong>Option 1</strong> is the correct answer</div>
+       <div style="text-align: center; margin-top: 50px; font-size: 14px; color: #555;">
+    <p>All rights reserved to <strong>@ 2024 LPU Study Support</strong>.</p>
+    <p>Check out our YouTube channel: 
+        <a href="https://www.youtube.com/@LPUStudySupport" target="_blank" style="color: #007BFF; text-decoration: none;">
+            Share and Subscribe for more content!
+        </a>
+    </p>
+</div>
+
+       
+       
+        </div>
+        <script>
+            function filterQuestions() {
+                const input = document.getElementById('searchInput');
+                const filter = input.value.toLowerCase();
+                const questions = document.getElementsByClassName('question');
+                
+                for (let i = 0; i < questions.length; i++) {
+                    const questionText = questions[i].innerText.toLowerCase();
+                    questions[i].style.display = questionText.includes(filter) ? '' : 'none';
+                }
+            }
+        </script>
+    
